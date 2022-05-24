@@ -9,6 +9,9 @@ export default function HomePage() {
             <Link to="/">
                 <button className="primary-button">Log out</button>
             </Link>
+            <Link to="/perfil">
+                    <button className="primary-button" id="reg_btn"><span>Perfil</span></button>
+            </Link>
             <span><p>{localStorage.getItem('user-info')}</p></span>
             <span><p>{items.username}</p></span>
             <span><p>{items.email}</p></span>

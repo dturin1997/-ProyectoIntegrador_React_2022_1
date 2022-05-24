@@ -150,3 +150,21 @@ form span {
 .home-page-title {
     color: #222
 }
+
+.header{
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 5%;
+    position: relative;
+    align-items: center;
+    display: flex;
+    height: 71px;
+    justify-content: space-between;
+}
+
+.imgperfil{
+    padding: 10px; 
+    margin: 10px;  
+    float: left;
+    width: 80px;
+}
