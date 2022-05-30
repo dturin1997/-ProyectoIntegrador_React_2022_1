@@ -5,8 +5,10 @@ import LandingPage from './components/pages/LandingPage'
 import LoginPage from './components/pages/LoginPage'
 import RegisterPage from './components/pages/RegisterPage'
 import ForgetPasswordPage from './components/pages/ForgetPasswordPage'
-import HomePage from './components/pages/HomePage'
-import PerfilCPage from './components/pages/PerfilCPage'
+import HomePage from './components/pages/user/HomePage'
+import PerfilPage from './components/pages/user/PerfilPage'
+import PerfilCIPage from './components/pages/user/PerfilCIPage'
+import PerfilCEPage from './components/pages/user/PerfilCEPage'
 
 import './App.css'
 
@@ -20,7 +22,9 @@ export default function App() {
                     <Route path="/register" component={ RegisterPage } />
                     <Route path="/forget-password" component={ ForgetPasswordPage } />
                     <Route path="/home" component={ HomePage } />
-                    <Route path="/perfil" component={ PerfilCPage } />
+                    <Route path="/perfil" component={ PerfilPage } />
+                    <Route path="/cursos" component={ PerfilCIPage } />
+                    <Route path="/certificados" component={ PerfilCEPage } />
                 </Switch>
                 <Footer />
             </div>
@@ -30,7 +34,7 @@ export default function App() {
 
 const Footer = () => {
     return (
-        <p className="text-center" style={ FooterStyle }>Designed & coded by <a href="https://izemspot.netlify.com" target="_blank" rel="noopener noreferrer">IZEMSPOT</a></p>
+        <p className="text-center" style={ FooterStyle }>Copyright 2022 <a href="https://izemspot.netlify.com" target="_blank" rel="noopener noreferrer"></a></p>
     )
 }
 
