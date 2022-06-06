@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import LandingPage from './components/pages/LandingPage'
+import DetallePage from './components/pages/user/DetallePage'
 import LoginPage from './components/pages/LoginPage'
 import RegisterPage from './components/pages/RegisterPage'
 import ForgetPasswordPage from './components/pages/ForgetPasswordPage'
@@ -24,7 +25,8 @@ export default function App() {
                     <Route path="/home" component={ HomePage } />
                     <Route path="/perfil" component={ PerfilPage } />
                     <Route path="/cursos" component={ PerfilCIPage } />
-                    <Route path="/certificados" component={ PerfilCEPage } />
+                    <Route path="/certificados" component={ PerfilCEPage }/>
+                    <Route path="/detalle_notas" component={ DetallePage } />
                 </Switch>
                 <Footer />
             </div>
@@ -42,7 +44,6 @@ const FooterStyle = {
     background: "#222",
     fontSize: ".8rem",
     color: "#fff",
-    position: "absolute",
     bottom: 0,
     padding: "1rem",
     margin: 0,

@@ -168,6 +168,7 @@ form span {
     float: left;
     width: 80px;
 }
-.actions{
-    
+
+.fondo-card{
+    background-color: rgb(216, 243, 255);
 }
