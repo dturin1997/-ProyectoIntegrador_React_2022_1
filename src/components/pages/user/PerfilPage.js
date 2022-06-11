@@ -13,7 +13,8 @@ export default function PerfilPage(){
                     <img className="imgperfil" src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'/>
                 </div>
            </header>
-           
+           <span><p>{items.username}</p></span>
+                <span><p>{items.email}</p></span>
            <NavbarPerfil>
            </NavbarPerfil>
             </Layout>

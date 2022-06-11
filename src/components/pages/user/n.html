@@ -1,20 +1,44 @@
-<div class="col-4">
-    <div class="card">
-        <img src="https://i.ytimg.com/vi/Nvm7JzhUpc4/mqdefault.jpg" class="card-img-top" alt="..."/>
-        <div class="card-body">
-            <h5 class="card-title">Ver su Certificado</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Click Aquí</a>
-        </div>
+return (
+    <div className="text-center">
+    <Layout>
+    <header>
+        
+    </header>
+    <h1 className="main-title home-page-title">Welcome to Virtual Academy</h1>
+    <Link to="/">
+        <button className="primary-button">Log out</button>
+    </Link>
+    <Link to="/perfil">
+            <button className="primary-button" id="reg_btn"><span>Perfil</span></button>
+    </Link>
+    <span><p>{localStorage.getItem('user-info')}</p></span>
+    <span><p>{items.username}</p></span>
+    <span><p>{items.email}</p></span>
+    <div>
+        <h3>Lista de Cursos</h3>
+        <section>
+        <table>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+          {cursos.map( curso =>{
+          <tr key={curso.id}>
+          <td>{curso.name}</td>
+          <td>{curso.precio}</td>
+          <td>{curso.description}</td>
+          <td>
+              <button onClick={curso_i} type="submit">Editar</button>
+          </td>
+          </tr>
+          })}
+          </tbody>
+        </table>
+       
+        </section>
     </div>
-</div>
-<div class="col-4">
-    <div class="card">
-        <img src="https://i.ytimg.com/vi/Q3JBvLOzL0o/mqdefault.jpg" class="card-img-top" alt="..."/>
-        <div class="card-body">
-            <h5 class="card-title">Ver su Certificado</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary">Click Aquí</a>
-        </div>
-    </div>
-</div>
+    </Layout>
+</div>)

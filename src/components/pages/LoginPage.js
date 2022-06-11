@@ -21,7 +21,7 @@ export default function SignInPage() {
     async function login(){
         console.warn(username,password)
         let item={username,password};
-        let result = await fetch("http://localhost:8089/api/auth/signin",{
+        let result = await fetch("http://localhost:8080/api/auth/signin",{
             method:'POST',
             headers:{
                 "Content-Type":"application/json",
