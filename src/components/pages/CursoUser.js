@@ -74,6 +74,21 @@ class App extends Component {
     })    
   }
 
+  calcularN1(url){
+    console.log(url)
+    axios.patch(url,{"nota1":29})
+    ;
+  }
+  calcularN2(url){
+    console.log(url)
+    axios.patch(url,{"nota2":49})
+    ;
+  }
+  calcularN3(url){
+    console.log(url)
+    axios.patch(url,{"nota3":69})
+    ;
+  }
   
 
   constructor(props) {
@@ -119,11 +134,56 @@ class App extends Component {
             //{console.log(cursosDetailUnidoNombreCurso)}                             
             return (
               <tr>
+                  <td>{cursosDetailUnidoNombreCurso.cursoDetail['_links'].curso.href}</td>
                   <td>{cursosDetailUnidoNombreCurso.cursoNombre}</td>
-                  <td>{cursosDetailUnidoNombreCurso.cursoNombre}</td>
-                 <td>{cursosDetailUnidoNombreCurso.cursoDetail['nota1']}</td>
-                 <td>{cursosDetailUnidoNombreCurso.cursoDetail['nota2']}</td> 
-                 <td>{cursosDetailUnidoNombreCurso.cursoDetail['nota3']}</td> 
+                 <td>
+                  <table>
+                    <tr>
+                      <td>
+                        {cursosDetailUnidoNombreCurso.cursoDetail['nota1']}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button onClick={()=>this.calcularN1(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href
+                        )}>Dar examen</button>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                </td>
+                <td>
+                  <table>
+                    <tr>
+                      <td>
+                        {cursosDetailUnidoNombreCurso.cursoDetail['nota2']}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button onClick={()=>this.calcularN2(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href
+                        )}>Dar examen</button>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                </td> 
+                <td>
+                  <table>
+                    <tr>
+                      <td>
+                        {cursosDetailUnidoNombreCurso.cursoDetail['nota3']}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button onClick={()=>this.calcularN3(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href
+                        )}>Dar examen</button>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                </td> 
                  <td>{cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</td>
                  <td></td>              
                  <td></td>              
