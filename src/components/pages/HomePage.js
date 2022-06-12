@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom'
 
 export default function HomePage() {
     const items=JSON.parse(localStorage.getItem('user-info'));
+    console.log(items.id);
+    let url= "http://localhost:8080/users/"+items.id
+    console.log(url)
     return (
         <div className="text-center">
             <h1 className="main-title home-page-title">welcome to our app</h1>
@@ -15,6 +18,7 @@ export default function HomePage() {
             <span><p>{localStorage.getItem('user-info')}</p></span>
             <span><p>{items.username}</p></span>
             <span><p>{items.email}</p></span>
+            <span><p>{items.id}</p></span>
         </div>
     )
 }

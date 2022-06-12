@@ -7,6 +7,7 @@ import RegisterPage from './components/pages/RegisterPage'
 import ForgetPasswordPage from './components/pages/ForgetPasswordPage'
 import HomePage from './components/pages/HomePage'
 import PerfilCPage from './components/pages/PerfilCPage'
+import CursoUser from './components/pages/CursoUser'
 
 import './App.css'
 
@@ -21,6 +22,7 @@ export default function App() {
                     <Route path="/forget-password" component={ ForgetPasswordPage } />
                     <Route path="/home" component={ HomePage } />
                     <Route path="/perfil" component={ PerfilCPage } />
+                    <Route path="/cursoUser" component={ CursoUser } />
                 </Switch>
                 <Footer />
             </div>
