@@ -32,9 +32,11 @@ export default function SignInPage() {
         const data = await result.json();
         //localStorage.setItem("user-info",JSON.stringify(data))
         localStorage.setItem("user-info",JSON.stringify(data))
+        //const items=JSON.parse(localStorage.getItem('user-info'));
         console.log(data.id)
         console.log(data.username)
         console.log(data.email)
+        //console.log(items.)
         history.push("/home")
     }
 

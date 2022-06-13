@@ -10,6 +10,7 @@ import HomePage from './components/pages/user/HomePage'
 import PerfilPage from './components/pages/user/PerfilPage'
 import PerfilCIPage from './components/pages/user/PerfilCIPage'
 import PerfilCEPage from './components/pages/user/PerfilCEPage'
+import CursoUser from './components/pages/CursoUser'
 
 import './App.css'
 
@@ -27,6 +28,7 @@ export default function App() {
                     <Route path="/cursos" component={ PerfilCIPage } />
                     <Route path="/certificados" component={ PerfilCEPage }/>
                     <Route path="/detalle_notas" component={ DetallePage } />
+                    <Route path="/cursoUser" component={ CursoUser } />
                 </Switch>
                 <Footer />
             </div>
