@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-class App extends Component {
+class CursoUser extends Component {
 
     
   componentWillMount(){
@@ -202,7 +202,7 @@ class App extends Component {
     )
   }
 }
-export default App;
+export default CursoUser;
 
 /*
 {console.log(this.state.cursosDetail)}

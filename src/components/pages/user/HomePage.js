@@ -6,12 +6,8 @@ import Layout from '../layout/Layout'
 export default function HomePage() {
     const items=JSON.parse(localStorage.getItem('user-info'));
     //const items2=JSON.parse(localStorage.getItem('cursosi-info'));
-    const items3=JSON.parse(localStorage.getItem('curso-info'));
-    const [id,setId]=useState("");
-
-    const [description,setDescription]=useState("");
-    const [name,setName]=useState("");
-    const [precio,setPrecio]=useState(0);
+    //const items3=JSON.parse(localStorage.getItem('curso-info'));
+console.log(items.id)
     const [cursos,setCursos]=useState([]);
 
 //Funciona
@@ -95,30 +91,8 @@ export default function HomePage() {
     getCursos("http://localhost:8080/cursoes");
   }, []);*/
 
-        /*let curso ={ 
-        name:json._embedded.cursoes.name,
-        description:json._embedded.cursoes.description,
-        precio:json._embedded.cursoes.precio
-       };
-       setCursos((cursos) => [...cursos, curso]);*/
     const historyC = useHistory();
 
-
-/*
-    const initialState = {
-      cursosData: [],
-      result: '',
-    };
-
-    for (let i = 0; i < cursos.cursosData.length; i += 1) {
-      const currentDevice = device.deviceData[i];
-      const entry = [ 
-        currentDevice['description'],
-        currentDevice['name'],
-        currentDevice['precio'],
-      ];
-      tableData.push(entry);
-    }*/
         return (
                 <div className="text-center">
                 <Layout>
@@ -207,23 +181,16 @@ export default function HomePage() {
         } */
 
       async function curso(){
-            let result = await fetch("http://localhost:8080/cursoes",{
-                method:'GET',
-                headers:{
-                    "Content-Type":"application/json",
-                    "Accept":"application/json" 
-                },
-            });
+            let result = await fetch("http://localhost:8080/cursoes");
             const data = await result.json();
             console.log(data)
-            console.log(data._embedded.cursoes) 
             //localStorage.setItem("user-info",JSON.stringify(data))
             localStorage.setItem("curso-info",JSON.stringify(data))
         }
 
        async function cursoi(){
           
-          let url1="http://localhost:8080/cursoes/"+items3.id
+          let url1="http://localhost:8080/cursoes/"
           let url2="http://localhost:8080/users/"+items.id
           let item={url1,url2};
             let result = await fetch("http://localhost:8080/cursoUser",{
