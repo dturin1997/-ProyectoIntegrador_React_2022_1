@@ -11,7 +11,7 @@ const NavbarPerfil = ({children}) => {
                 Datos de tu perfil
             </Link>
             <hr></hr>
-            <Link to="/cursos">
+            <Link to="/cursosInscritos">
                 Cursos Inscritos
             </Link>
             <hr></hr>
@@ -24,7 +24,9 @@ const NavbarPerfil = ({children}) => {
             </Link>
             <hr></hr>
             </div>
+           <div class="col">
             {children}
+            </div> 
        </div>
    </main>
     )

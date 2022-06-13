@@ -20,76 +20,6 @@ console.log(items.id)
           setCursos((json._embedded.cursoes));
         });
     },[]);
-/*
-          json._embedded.cursoes.forEach(el=> {
-            fetch(el.url)
-              .then((res)=>res.json())
-              .then((json)=>{
-                let curso ={ 
-                  name:json.name,
-                  description:json.description,
-                  precio:json.precio
-                 };
-                 setCursos((cursos) => [...cursos,curso]);
-              });
-          });*/
-
-//let curso: 
-//json await = variable de tipo let
-  //useEffect(() => {
-      //hacer funciones asincronas con useffect
-      /*El operador await se usa para esperar una promesa . 
-      Solo se puede usar dentro de una función asíncrona dentro 
-      del código JavaScript normal; */
-  /* const getCursos = async (url) => {
-        let res = await fetch(url),
-          json = await res.json();
-          console.log(json);
-  
-        json._embedded.cursoes.forEach(async (el) => {
-          let res = await fetch(el.url),
-            json = await res.json();
-  
-          console.log(json);
-          let curso ={ 
-            name:json.name,
-            description:json.description,
-            precio:json.precio
-           };
-  
-          setCursos((cursos) => [...cursos, curso]);
-        });
-      };
-  
-      getCursos("http://localhost:8080/cursoes");
-    }, []);*/
-/*
-    useEffect(() => {
-
-    const getCursos = async (url) => {
-      let res = await fetch(url),
-        json = await res.json();
-        console.log(json);
-
-      json._embedded.cursoes.forEach(async (el) => {
-        let res = await fetch(el.url),
-          json = await res.json();
-
-        console.log(json);
-        let curso ={ 
-          name:json.name,
-          description:json.description,
-          precio:json.precio
-         };
-
-        setCursos((cursos) => [...cursos, curso]);
-      });
-
-
-    };
-
-    getCursos("http://localhost:8080/cursoes");
-  }, []);*/
 
     const historyC = useHistory();
 
@@ -126,8 +56,10 @@ console.log(items.id)
                                       <h5 class="card-title">{curso.name}</h5>
                                       <p class="card-text">S/.{curso.precio}</p><br></br>
                                       <p class="card-text">{curso.description}</p>
+                                      <p class="card-text">{curso._links.curso.href}</p>
                                       <button 
-                                      onClick={cursoi}
+                                      //onClick={cursoi}
+                                      onClick={()=>cursoi(curso._links.curso.href)}
                                        id="sub_btn" class="btn btn-primary" 
                                        type="submit">Empezar  Curso</button>
                                   </div>
@@ -153,58 +85,41 @@ console.log(items.id)
             </div>)
           
 
-     /* useEffect(()=>{
-            fetch("http://127.0.0.1:8080/cursoes")
-            .then((response) => response.json())  
-            .then((cur) => {
-              this.setState({ productos: cur,
-              })
-            }) 
-            .catch(
-              (b)=>{
-                console.log(Error)
-              }
-            )
-          },[])
-*/
-     /* componentWillMount(); {
-          fetch('http://127.0.0.1:8080/cursoes')
-            .then((response) => {
-              return response.json()
-            })
-            .then((cur) => {
-              this.setState({ 
-                cursos: cur,
-                recuperado: true
-               }) 
-            })    
-        } */
-
       async function curso(){
             let result = await fetch("http://localhost:8080/cursoes");
             const data = await result.json();
             console.log(data)
             //localStorage.setItem("user-info",JSON.stringify(data))
             localStorage.setItem("curso-info",JSON.stringify(data))
+           // console.log(items3)
         }
 
-       async function cursoi(){
-          
-          let url1="http://localhost:8080/cursoes/"
+       async function cursoi(urlCurso){ 
+          //curso()
+
+          //let url1="http://localhost:8080/cursoes/"+items3.id
+          let url1 = urlCurso
+          console.log(url1)
           let url2="http://localhost:8080/users/"+items.id
+          console.log(url2)
           let item={url1,url2};
-            let result = await fetch("http://localhost:8080/cursoUser",{
+            let result = await fetch("http://localhost:8080/cursoUsers",{
+                
                 method:'POST',
                 headers:{
                     "Content-Type":"application/json",
                     "Accept":"application/json" 
                 },
-                body:JSON.stringify(item)
+                body:JSON.stringify(
+                  {"curso":url1,
+                   "user": url2}
+                )
             });
-            const data = await result.json();
+            //const data = await result.json();
+            
             //localStorage.setItem("user-info",JSON.stringify(data))
-            localStorage.setItem("cursoi-info",JSON.stringify(data))
-            historyC.push("/cursos")
+            //localStorage.setItem("cursoi-info",JSON.stringify(data))
+            historyC.push("/cursosInscritos")
         }
 
         async function curso_i(){

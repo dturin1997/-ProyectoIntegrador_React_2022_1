@@ -25,9 +25,9 @@ export default function App() {
                     <Route path="/forget-password" component={ ForgetPasswordPage } />
                     <Route path="/home" component={ HomePage } />
                     <Route path="/perfil" component={ PerfilPage } />
-                    <Route path="/cursos" component={ PerfilCIPage } />
+                    <Route path="/cursosInscritos" component={ PerfilCIPage } />
                     <Route path="/certificados" component={ PerfilCEPage }/>
-                    <Route path="/detalle_notas" component={ DetallePage } />
+                    <Route path="/cursoUsers" component={ DetallePage } />
                     <Route path="/cursoUser" component={ CursoUser } />
                 </Switch>
                 <Footer />
