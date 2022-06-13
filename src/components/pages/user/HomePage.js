@@ -6,7 +6,7 @@ import Layout from '../layout/Layout'
 export default function HomePage() {
     const items=JSON.parse(localStorage.getItem('user-info'));
     //const items2=JSON.parse(localStorage.getItem('cursosi-info'));
-    //const items3=JSON.parse(localStorage.getItem('curso-info'));
+    const items3=JSON.parse(localStorage.getItem('curso-info'));
     const [id,setId]=useState("");
 
     const [description,setDescription]=useState("");
@@ -170,7 +170,9 @@ export default function HomePage() {
                         id="sub_btn" type="submit">Curso</button>
                     </p>
                     <p>
-                     {curso_i.data}
+                    <button 
+                        onClick={curso}
+                        id="sub_btn" type="submit">Curso listado consola</button>
                     </p>
                 </div>
                 </Layout>
@@ -213,15 +215,16 @@ export default function HomePage() {
                 },
             });
             const data = await result.json();
-            setCursos(data._embedded.cursoes);
+            console.log(data)
+            console.log(data._embedded.cursoes) 
             //localStorage.setItem("user-info",JSON.stringify(data))
             localStorage.setItem("curso-info",JSON.stringify(data))
         }
 
        async function cursoi(){
           
-          let url1="http://localhost:8080/cursoes/"+{id}
-          let url2="http://localhost:8080/users/"+{id}
+          let url1="http://localhost:8080/cursoes/"+items3.id
+          let url2="http://localhost:8080/users/"+items.id
           let item={url1,url2};
             let result = await fetch("http://localhost:8080/cursoUser",{
                 method:'POST',
