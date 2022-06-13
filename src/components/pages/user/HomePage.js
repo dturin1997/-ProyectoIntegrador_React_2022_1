@@ -152,8 +152,10 @@ export default function HomePage() {
                                       <h5 class="card-title">{curso.name}</h5>
                                       <p class="card-text">S/.{curso.precio}</p><br></br>
                                       <p class="card-text">{curso.description}</p>
+                                      <p class="card-text">{curso._links.curso.href}</p>
                                       <button 
-                                      onClick={cursoi}
+                                      //onClick={cursoi}
+                                      onClick={()=>cursoi(curso._links.curso.href)}
                                        id="sub_btn" class="btn btn-primary" 
                                        type="submit">Empezar  Curso</button>
                                   </div>
@@ -219,25 +221,36 @@ export default function HomePage() {
             console.log(data._embedded.cursoes) 
             //localStorage.setItem("user-info",JSON.stringify(data))
             localStorage.setItem("curso-info",JSON.stringify(data))
+            console.log(items3)
         }
 
-       async function cursoi(){
+       async function cursoi(urlCurso){
           
-          let url1="http://localhost:8080/cursoes/"+items3.id
+          //curso()
+
+          //let url1="http://localhost:8080/cursoes/"+items3.id
+          let url1 = urlCurso
+          console.log(url1)
           let url2="http://localhost:8080/users/"+items.id
+          console.log(url2)
           let item={url1,url2};
-            let result = await fetch("http://localhost:8080/cursoUser",{
+            let result = await fetch("http://localhost:8080/cursoUsers",{
+                
                 method:'POST',
                 headers:{
                     "Content-Type":"application/json",
                     "Accept":"application/json" 
                 },
-                body:JSON.stringify(item)
+                body:JSON.stringify(
+                  {"curso":url1,
+                   "user": url2}
+                )
             });
-            const data = await result.json();
+            //const data = await result.json();
+            
             //localStorage.setItem("user-info",JSON.stringify(data))
-            localStorage.setItem("cursoi-info",JSON.stringify(data))
-            historyC.push("/cursos")
+            //localStorage.setItem("cursoi-info",JSON.stringify(data))
+            //historyC.push("/cursos")
         }
 
         async function curso_i(){

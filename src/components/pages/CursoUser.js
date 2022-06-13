@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { useHistory } from "react-router-dom";
 
 
 class App extends Component {
@@ -9,9 +9,9 @@ class App extends Component {
   componentWillMount(){
     
     //var arrayNombres=[];
-    
-
-    axios.get('http://localhost:8080/users/1/cursoUser/')
+    const items=JSON.parse(localStorage.getItem('user-info'));
+    console.log("Usuario ID: "+items.id)
+    axios.get('http://localhost:8080/users/'+items.id+'/cursoUser/')
     .then(res => {
       console.log(res.data)
       this.setState({ cursosDetail: res.data._embedded.cursoUsers })
@@ -77,17 +77,27 @@ class App extends Component {
   calcularN1(url){
     console.log(url)
     axios.patch(url,{"nota1":29})
+    /*
+    axios.get(url)
+    .then(res=>{
+      this.setState({
+        
+      })
+    });
     ;
+    */
   }
   calcularN2(url){
     console.log(url)
     axios.patch(url,{"nota2":49})
     ;
+    
   }
   calcularN3(url){
     console.log(url)
     axios.patch(url,{"nota3":69})
     ;
+    
   }
   
 
