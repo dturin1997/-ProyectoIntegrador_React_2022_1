@@ -172,3 +172,9 @@ form span {
 .fondo-card{
     background-color: rgb(216, 243, 255);
 }
+
+div.scroll_horizontal {
+	width: auto;
+	overflow: auto;
+	padding: 8px;
+}

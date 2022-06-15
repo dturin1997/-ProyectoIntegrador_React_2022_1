@@ -50,6 +50,18 @@ class PerfilCIPage extends Component {
     })    
   }
 
+  calcularN1(url){
+    console.log(url)
+    axios.patch(url,{"nota1":29});
+  }
+  calcularN2(url){
+    console.log(url)
+    axios.patch(url,{"nota2":49});
+  }
+  calcularN3(url){
+    console.log(url)
+    axios.patch(url,{"nota3":69});
+  }
 
   constructor(props) {
     super(props);
@@ -60,7 +72,13 @@ class PerfilCIPage extends Component {
       
     })
   }
-  
+  //Aun no funciona
+ getPromedio(a,b,c){
+    let stateCopy = [...this.state.cursosDetailUnidoNombreCurso];
+    let datasetSum = stateCopy.reduce((a,b,c) => parseInt(a),0 + parseInt(b),0 + parseInt(c),0);
+    let p = Math.round(datasetSum/stateCopy.length);
+    }
+
 render() {
     return (
         <div className="text-center">
@@ -98,11 +116,29 @@ render() {
                                     <div class="card fondo-card">
                                         <div class="card-body">
                                             <h6></h6>
-                                            <p>¿Quiere ver los detalles de las notas? haga click aquí</p>
-                                           <p>Promedio Actual: {cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</p> 
-                                            <Link to="/detalle_notas">
-                                                <button class="btn btn-info">Ver detalles</button>
-                                            </Link>
+                                            <p>Do you want to see the details of the notes? <br/><strong>click the button</strong></p>
+                                           <p>Current average: {cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</p> 
+                                            <p class="dropdown">
+                                              <button class="dropdown-toggle btn btn-info"  id="dropdownMenuButton1" type="button" data-toggle="dropdown" aria-expanded="false">
+                                              Ver detalles ...
+                                              </button>
+                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <p class="dropdown-item" >Nota1: {cursosDetailUnidoNombreCurso.cursoDetail['nota1']}
+                                                &nbsp;&nbsp;
+                                                <button class="btn btn-primary" onClick={()=>this.calcularN1(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href)}>Dar examen</button>
+                                                </p>
+                                                <p class="dropdown-item" >Nota2: {cursosDetailUnidoNombreCurso.cursoDetail['nota2']}
+                                                &nbsp;&nbsp;
+                                                <button class="btn btn-primary" onClick={()=>this.calcularN2(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href)}>Dar examen</button>
+                                                </p>
+                                                <p class="dropdown-item" >Nota3: {cursosDetailUnidoNombreCurso.cursoDetail['nota3']}
+                                                &nbsp;&nbsp;
+                                                <button class="btn btn-primary" onClick={()=>this.calcularN3(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href)}>Dar examen</button>
+                                                </p>
+                                                <p class="dropdown-item" >Promedio: {cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</p>
+                                                <p class="dropdown-item" >Categoria: {this.getPromedio(cursosDetailUnidoNombreCurso.cursoDetail['nota1'],cursosDetailUnidoNombreCurso.cursoDetail['nota2',cursosDetailUnidoNombreCurso.cursoDetail['nota3']])}</p>
+                                              </div>
+                                          </p>
                                         </div>
                                     </div>
                                 </div></div></>

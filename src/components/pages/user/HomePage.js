@@ -30,15 +30,10 @@ console.log(items.id)
                     
                 </header>
                 <h1 className="main-title home-page-title">Welcome to Virtual Academy</h1>
-                <Link to="/">
-                    <button className="primary-button">Log out</button>
-                </Link>
-                <Link to="/perfil">
-                        <button className="primary-button" id="reg_btn"><span>Perfil</span></button>
-                </Link>
                 <span><p>{localStorage.getItem('user-info')}</p></span>
                 <span><p>{items.username}</p></span>
                 <span><p>{items.email}</p></span>
+                <hr></hr>
                 <div>
                     <h3>Lista de Cursos</h3>
                     {cursos.length === 0?(
@@ -46,26 +41,27 @@ console.log(items.id)
                     ):(
                       <section>
                    <div class="container">
-                    
-                      <div class="row" >
-                      {cursos.map( curso=>( 
-                          <div class="col-4" key={curso.id}>
-                          <div class="card mx_auto">
-                                  <img src="https://i.ytimg.com/vi/Nvm7JzhUpc4/mqdefault.jpg" class="card-img-top" alt="..."/>
-                                  <div class="card-body" >
-                                      <h5 class="card-title">{curso.name}</h5>
-                                      <p class="card-text">S/.{curso.precio}</p><br></br>
-                                      <p class="card-text">{curso.description}</p>
-                                      <p class="card-text">{curso._links.curso.href}</p>
-                                      <button 
-                                      //onClick={cursoi}
-                                      onClick={()=>cursoi(curso._links.curso.href)}
-                                       id="sub_btn" class="btn btn-primary" 
-                                       type="submit">Empezar  Curso</button>
-                                  </div>
-                              </div>
-                          </div>
-                      ))}
+                        <div className='scroll_horizontal'>
+                            <div class="row" >
+                            {cursos.map( curso=>( 
+                                    <div class="col-4" key={curso.id}>
+                                    <div class="card mx_auto">
+                                            <img src="https://i.ytimg.com/vi/Nvm7JzhUpc4/mqdefault.jpg" class="card-img-top" alt="..."/>
+                                            <div class="card-body" >
+                                                <h5 class="card-title">{curso.name}</h5>
+                                                <p class="card-text">S/.{curso.precio}</p><br></br>
+                                                <p class="card-text">{curso.description}</p>
+                                                <p class="card-text">{curso._links.curso.href}</p>
+                                                <button 
+                                                //onClick={cursoi}
+                                                onClick={()=>cursoi(curso._links.curso.href)}
+                                                id="sub_btn" class="btn btn-primary" 
+                                                type="submit">Empezar  Curso</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                            ))}
+                            </div>
                       </div>
                     </div> 
                     </section>
