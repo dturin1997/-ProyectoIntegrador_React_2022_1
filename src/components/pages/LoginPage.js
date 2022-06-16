@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
 
 import '../../App.css'
+import '../../Login.css'
 
 export default function SignInPage() {
 
@@ -41,12 +42,13 @@ export default function SignInPage() {
     }
 
     return (
-        <div className="text-center m-5-auto">
-            <h2>Sign in to us</h2>
+        <div class="body">
+            <div className="text-center m-5-auto fondo">
+            <h2 class="text-white">Sign in to us</h2>
             <div class="div-form">
                 <div>
                     <p>
-                        <label>Username or email address</label><br/>
+                        <label>Username</label><br/>
                         <input type="text" name="first_name" 
                         onChange={(e)=>setUsername(e.target.value)}
                         required />
@@ -55,11 +57,11 @@ export default function SignInPage() {
                 <div>
                     <p>
                         <label>Password</label>
-                        <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
                         <br/>
-                        <input type="password" name="password" 
+                        <input  type="password" name="password" 
                         onChange={(e)=>setPassword(e.target.value)}
-                        required />
+                        required /><br/>
+                        <Link to="/forget-password"><label className="right-label">Forget password?</label></Link>
                     </p>
                 </div>
                 <div>
@@ -70,10 +72,11 @@ export default function SignInPage() {
                     </p>
                 </div>
             </div>
-            <footer>
-                <p>First time? <Link to="/register">Create an account</Link>.</p>
-                <p><Link to="/">Back to Homepage</Link>.</p>
-            </footer>
+            <section>
+                <p class="text-white">First time? <Link to="/register"><p class="text-white"><strong>Create an account</strong></p></Link></p>
+                <p><Link to="/"><p class="text-white"><strong>Back to Homepage</strong></p></Link>.</p>
+            </section>
+        </div>
         </div>
     )
 }
