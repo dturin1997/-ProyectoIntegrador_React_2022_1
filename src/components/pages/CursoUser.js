@@ -5,13 +5,8 @@ import axios from 'axios';
 
 class App extends Component {
 
-    
-  componentWillMount(){
-    
-    //var arrayNombres=[];
-    
-
-    axios.get('http://localhost:8080/users/1/cursoUser/')
+  consulta = async () => { 
+    await axios.get('http://localhost:8080/users/1/cursoUser/')
     .then(res => {
       console.log(res.data)
       this.setState({ cursosDetail: res.data._embedded.cursoUsers })
@@ -72,22 +67,87 @@ class App extends Component {
       //arrayNombres=[]
       //console.log(arrayNombres)
     })    
-  }
+  }  
 
-  calcularN1(url){
+  componentWillMount(){
+    
+    //var arrayNombres=[];
+    
+    
+    
+
+  this.consulta()
+
+}
+
+  calcularN1= async(url,index) => { 
     console.log(url)
-    axios.patch(url,{"nota1":29})
-    ;
+    console.log(index)
+    await axios.patch(url,{"nota1":16})
+    //this.consulta()
+    //this.state.cursosDetailUnidoNombreCurso
+    //var promedio=(detalle['nota1']+detalle['nota2']+detalle['nota3'])/3;
+
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1']=16;
+    console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1'])
+    var nota1=this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1'];
+    var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
+    var nota3= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3'];
+
+    var promedio=(nota1+nota2+nota3)/3;
+    console.log(promedio)
+    await axios.patch(url,{"promedio":promedio})
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio']=promedio;
+    console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio'])
+    //this.consulta()
+    //this.render()
+    this.forceUpdate();
+    
   }
-  calcularN2(url){
+  calcularN2= async(url,index) => {
     console.log(url)
-    axios.patch(url,{"nota2":49})
-    ;
+    await axios.patch(url,{"nota2":17})
+    //this.consulta()
+    //var promedio=(detalle['nota1']+detalle['nota2']+detalle['nota3'])/3;
+    //console.log(promedio)
+
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2']=17;
+    console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'])
+    var nota1=this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1'];
+    var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
+    var nota3= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3'];
+
+    var promedio=(nota1+nota2+nota3)/3;
+    console.log(promedio)
+    await axios.patch(url,{"promedio":promedio})
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio']=promedio;
+    console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio'])
+    //this.consulta()
+    this.forceUpdate();
+    
   }
-  calcularN3(url){
+  calcularN3= async(url,index) => {
     console.log(url)
-    axios.patch(url,{"nota3":69})
-    ;
+    await axios.patch(url,{"nota3":18})
+    //this.consulta()
+    //var promedio=(detalle['nota1']+detalle['nota2']+detalle['nota3'])/3;
+    //console.log(promedio)
+
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3']=18;
+    console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'])
+    var nota1=this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1'];
+    var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
+    var nota3= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3'];
+
+    var promedio=(nota1+nota2+nota3)/3;
+    console.log(promedio)
+    await axios.patch(url,{"promedio":promedio})
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio']=promedio;
+    console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio'])
+    await axios.patch(url,{"promedio":promedio})
+    //this.consulta()
+    this.forceUpdate();
+    
   }
   
 
@@ -132,6 +192,7 @@ class App extends Component {
           
           {this.state.cursosDetailUnidoNombreCurso.map( (cursosDetailUnidoNombreCurso,index1) =>{
             //{console.log(cursosDetailUnidoNombreCurso)}                             
+            {console.log(index1)}                             
             return (
               <tr>
                   <td>{cursosDetailUnidoNombreCurso.cursoDetail['_links'].curso.href}</td>
@@ -145,7 +206,7 @@ class App extends Component {
                     </tr>
                     <tr>
                       <td>
-                        <button onClick={()=>this.calcularN1(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href
+                        <button onClick={()=>this.calcularN1(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
                         )}>Dar examen</button>
                       </td>
                     </tr>
@@ -161,7 +222,7 @@ class App extends Component {
                     </tr>
                     <tr>
                       <td>
-                        <button onClick={()=>this.calcularN2(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href
+                        <button onClick={()=>this.calcularN2(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
                         )}>Dar examen</button>
                       </td>
                     </tr>
@@ -177,7 +238,7 @@ class App extends Component {
                     </tr>
                     <tr>
                       <td>
-                        <button onClick={()=>this.calcularN3(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href
+                        <button onClick={()=>this.calcularN3(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
                         )}>Dar examen</button>
                       </td>
                     </tr>
