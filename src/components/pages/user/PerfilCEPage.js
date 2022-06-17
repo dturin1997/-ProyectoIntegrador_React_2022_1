@@ -6,13 +6,15 @@ import NavbarPerfil from '../Navbar/NavbarPerfil'
 export default function PerfilCEPage(){
     const items=JSON.parse(localStorage.getItem('user-info'));
     return (
-        <div className="text-center">
+        <div className="text-center fondo">
             <Layout>
+            <div className='fondo3'>
             <header className='header'>
                 <div>
                     <img className="imgperfil" src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'/>
                 </div>
            </header>
+           </div>
            
            <NavbarPerfil>
            <div class="col-4">

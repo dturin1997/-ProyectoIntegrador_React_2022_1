@@ -5,8 +5,8 @@ const NavbarPerfil = ({children}) => {
     return (
         <main>
         <hr></hr>
-       <div class="row">
-            <div class="col col-lg-3">
+       <div class="row ">
+            <div class="col col-lg-3 fondo2">
             <Link to="/perfil">
                 Datos de tu perfil
             </Link>
@@ -24,7 +24,7 @@ const NavbarPerfil = ({children}) => {
             </Link>
             <hr></hr>
             </div>
-           <div class="col">
+           <div class="col fondo4">
             {children}
             </div> 
        </div>

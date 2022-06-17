@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
-import Layout from '../layout/Layout'
+import Layout from '../layout/Layout';
+import remoto from '../../../assets/images/remoto.png';
 
 export default function HomePage() {
     const items=JSON.parse(localStorage.getItem('user-info'));
@@ -24,18 +25,18 @@ console.log(items.id)
     const historyC = useHistory();
 
         return (
-                <div className="text-center">
+                <div className="text-center fondo ">
                 <Layout>
                 <header>
                     
                 </header>
-                <h1 className="main-title home-page-title">Welcome to Virtual Academy</h1>
+                <h1 className="main-title home-page-title text-white">Welcome to Virtual Academy</h1>
                 <span><p>{localStorage.getItem('user-info')}</p></span>
                 <span><p>{items.username}</p></span>
                 <span><p>{items.email}</p></span>
-                <hr></hr>
+                <hr className='line'></hr>
                 <div>
-                    <h3>Lista de Cursos</h3>
+                    <h3 class="text-white">Lista de Cursos</h3>
                     {cursos.length === 0?(
                       <h4>Cargando ...</h4>
                     ):(
@@ -66,6 +67,35 @@ console.log(items.id)
                     </div> 
                     </section>
                     )}
+                    <hr className='line'/>
+                    <section class="about-services">
+                    <div class="contenedor">
+                        
+                        <h2 class="titulo">Nuestros servicios</h2>
+                        <div class="servicio-cont">
+                            <div class="servicio-ind">
+                                <img src={remoto} alt=""/>
+                                <h3>Name</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, expedita!</p>
+                            </div>
+                            <div class="servicio-ind">
+                                <img src={remoto} alt=""/>
+                                <h3>Name</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, expedita!</p>
+                            </div>
+                            <div class="servicio-ind">
+                                <img src={remoto} alt=""/>
+                                <h3>Name</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi, expedita!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </div>
+                </Layout>
+            </div>)
+          
+/*
                     <p>
                         <button 
                         onClick={curso_i}
@@ -76,11 +106,7 @@ console.log(items.id)
                         onClick={curso}
                         id="sub_btn" type="submit">Curso listado consola</button>
                     </p>
-                </div>
-                </Layout>
-            </div>)
-          
-
+ */
       async function curso(){
             let result = await fetch("http://localhost:8080/cursoes");
             const data = await result.json();

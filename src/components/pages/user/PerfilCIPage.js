@@ -81,13 +81,15 @@ class PerfilCIPage extends Component {
 
 render() {
     return (
-        <div className="text-center">
+        <div className="text-center fondo">
             <Layout>
+            <div className='fondo3'>
             <header className='header'>
                 <div>
                     <img className="imgperfil" src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'/>
                 </div>
            </header>
+           </div>
            
            <NavbarPerfil>
            <h1>Lista de Detalle de Cursos</h1>
@@ -100,7 +102,7 @@ render() {
                         return (
                             
                         <><div class="row">
-                            <div class="col-5">
+                            <div class="col-6">
                                 <div class="card">
                                     <img src="https://i.ytimg.com/vi/Q3JBvLOzL0o/mqdefault.jpg" class="card-img-top" alt="..." />
                                     <div class="card-body">

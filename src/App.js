@@ -50,5 +50,5 @@ const FooterStyle = {
     padding: "1rem",
     margin: 0,
     width: "100%",
-    opacity: ".5"
+    opacity: ".8"
 }

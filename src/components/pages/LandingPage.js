@@ -39,7 +39,7 @@ export default function LandingPage() {
                 <section class="contenedor sobre-nosotros">
                     <h2 class="titulo">Nuestro Servicio</h2>
                     <div class="contenedor-sobre-nosotros">
-                       <img src={ImgFondo} alt="" class="imagen-about-us"/>
+                       <img src={ImgFondo} alt="" class="imagen-about-us "/>
                         <div class="contenido-textos">
                             <h3><span>1</span>Los mejores cursos web</h3>
                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quas dolor placeat voluptatem voluptatum veritatis explicabo laborum fugit dolore voluptate incidunt illum totam rem dolorum aperiam repellat, fuga dolores tenetur commodi.</p>
@@ -123,6 +123,7 @@ export default function LandingPage() {
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit id ullam quos quidem. In doloribus minima voluptatibus soluta architecto nemo quam, iste molestias vero temporibus, facere commodi ipsum accusamus officia!</p>
                             </div>
                         </div>
+                        &nbsp;
                         <div class="card">
                             <img src={user} alt=""/>
                             <div class="contenido-texto-card">

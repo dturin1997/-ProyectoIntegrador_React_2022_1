@@ -1,8 +1,29 @@
 import React, {useState, useEffect} from 'react'
-import { useHistory } from "react-router-dom";
+import { Route, Router, useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import axios from 'axios';
 
 import '../../App.css'
+
+
+const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+const validationSchema = yup.object({
+  username: yup.string().min(3,"Please enter you username").required("Enter you username!"),
+  email: yup.string().email("Please enter you email address").required(),
+  password:yup.string().matches(PASSWORD_REGEX,"Please enter a validate password").required(),
+  confirmPassword: yup
+  .string()
+  .required("Please confirm your password")
+  .when("password",{
+    is: val => (val && val.length > 0 ? true : false),
+    then: yup.string().oneOf([yup.ref("password")],"Password does not match")
+  }),
+  first_name:yup.string().min(3,"Please enter you first name").required("Enter you first name!"),
+  last_name:yup.string().min(3,"Please enter you last name").required("Enter you last name!"),
+  birthday:yup.string().min(10,"Please enter you birthday").required("Enter you birthday!")
+})
 
 export default function SignUpPage() {
 
@@ -13,142 +34,137 @@ export default function SignUpPage() {
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");*/
     const history = useHistory();
-    const initialValues = {username:"",email:"",password:"",first_name:"",last_name:"",birthday:""}
+   /* const initialValues = {
+      username:"",
+      email:"",
+      password:"",
+      confirmPassword:"",
+      first_name:"",
+      last_name:"",
+      birthday:""}
     const [formValues, setFormValues]=useState(initialValues);
     const [formErrors, setFormErrors]=useState({});
-    const [isSubmit, setIsSubmit]=useState(false);
+    const [isSubmit, setIsSubmit]=useState(false);*/
+    const [success, setSuccess]=useState(null);
+    const [error, setError]=useState(null);
+    const onSubmit = async (values) => {
+      const {confirmPassword, ...data} = values;
+       const response = axios.post("http://localhost:8080/api/auth/signup", data).catch((err) =>
+       {if(err && err.response)
+        console.log("Error: ",err.response.data);
+        setError(err.response.data.message);
+        setSuccess(null);
+        alert("Error al registrarse")
+      });
+      if (response && response.data) {
+        setError(null);
+        setSuccess(response.data.message);
+        formik.resetForm();
+        singup();
+        alert("Tu te has registrado exitosamente!")
+      }
+      //formik.resetForm;
+    };
+    const formik = useFormik({
+      initialValues : {
+        username:"",
+        email:"",
+        password:"",
+        confirmPassword:"",
+        first_name:"",
+        last_name:"",
+        birthday:""},
+      validateOnBlur: true,
+      onSubmit,
+      validationSchema: validationSchema,
+    })
    // const [formValues, setFormValues]=useState(username,firstname,lastname,birthday,email,password)
     
+   async function singup(){
+    history.push("/login");
+   }
 
-
-    async function login(){
-        let item={formValues};
-        let result = await fetch("http://localhost:8080/api/auth/signin",{
-            method:'POST',
-            headers:{
-                "Content-Type":"application/json",
-                "Accept":"application/json" 
-            },
-            body:JSON.stringify(item)
-        });
-        const data = await result.json();
-        //localStorage.setItem("user-info",JSON.stringify(data))
-        localStorage.setItem("user-info",JSON.stringify(data))
-        //const items=JSON.parse(localStorage.getItem('user-info'));
-        console.log(data.id)
-        console.log(data.username)
-        console.log(data.email)
-        //console.log(items.)
-        history.push("/login")
-    }
-
-
-
-    const handleChange = (e) => {
-        console.log(e.target);
-        const {name, value} = e.target;
-        setFormValues({...formValues,[name]:value});
-    }
-
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmit(login());
-    }
-
-
-useEffect(() =>{
-console.log(formErrors);
-if(Object.keys(formErrors).length == 0 && isSubmit){
-    console.log(formValues);
-}
-}, {formErrors});
-
-    const validate = (values) => {
-        const errors = {}
-        const regex=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-        if (!values.username) {
-            errors.username = "Username is required!";
-          }
-          if (!values.email) {
-            errors.email = "Email is required!";
-          } else if (!regex.test(values.email)) {
-            errors.email = "This is not a valid email format!";
-          }
-          if (!values.password) {
-            errors.password = "Password is required";
-          } else if (values.password.length < 8) {
-            errors.password = "Password must be more than 4 characters";
-          } else if (values.password.length > 20) {
-            errors.password = "Password cannot exceed more than 10 characters";
-          }
-          if(!values.first_name){
-            errors.first_name = "First Name is required!";
-          }
-          if(!values.last_name){
-            errors.last_name = "Last Name is required!";
-          }
-          if(!values.birthday){
-            errors.birthday = "Birthday is required!";
-          }
-          return errors;
-    }
 
     return (
-        <div className="text-center m-5-auto">
-            <h2>Join us</h2>
-            <h5>Create your personal account</h5>
-            <form onSubmit={handleSubmit}>
+        <div className="text-center m-5-auto fondo">
+            <h2 class="text-white">Join us</h2>
+            <h5 class="text-white">Create your personal account</h5>
+            {!error && <p className='formSuccess'>{success ? success : ""}</p>}
+            {!success && <p className='formError'>{error ? error : ""}</p>}
+            <form onSubmit={formik.handleSubmit}>
                  <p>
-                    <p>{formErrors.username}</p>
+                    <p className='fieldValidate'>{formik.touched.username && formik.errors.username ? formik.errors.username:""}</p>
                     <div>
                         <label>Username</label><br/>
                         <input type="text" name="username" 
-                        value={formValues.username}
-                        onChange={handleChange}
+                        value={formik.values.username}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         />
                     </div>
                 </p>
                 <p>
+                   <p className='fieldValidate'>{formik.touched.email && formik.errors.email ? formik.errors.email:""}</p>
+                  <div>
                     <label>Email address</label><br/>
                     <input type="email" name="email" 
-                     value={formValues.email}
-                     onChange={handleChange} />
+                     value={formik.values.email}
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur} />
+                  </div>
                 </p>
                 <p>
+                    <div><p className='fieldValidate'>{formik.touched.password && formik.errors.password ? formik.errors.password:""}</p>
                     <label>Password</label><br/>
                     <input type="password" name="password" 
-                     value={formValues.password}
-                     onChange={handleChange} />
+                     value={formik.values.password}
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur} />
+                     </div>
                 </p>
                 <p>
+                    <div><p className='fieldValidate'>{formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword:""}</p>
+                    <label>Confirm Password</label><br/>
+                    <input type="password" name="confirmPassword" 
+                     value={formik.values.confirmPassword}
+                     onChange={formik.handleChange}
+                     onBlur={formik.handleBlur} />
+                    </div>
+                </p>
+                <p><div><p className='fieldValidate'>{formik.touched.first_name && formik.errors.first_name ? formik.errors.first_name:""}</p>
                         <label>First Name</label><br/>
                         <input type="text" name="first_name" 
-                        value={formValues.first_name}
-                        onChange={handleChange} />
+                        value={formik.values.first_name}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur} />
+                  </div>
                 </p>
 
-                <p>
+                <p><div><p className='fieldValidate'>{formik.touched.last_name && formik.errors.last_name ? formik.errors.last_name:""}</p>
                         <label>Last Name</label><br/>
                         <input type="text" name="last_name" 
-                        onChange={handleChange}
-                        value={formValues.last_name} />
+                        onChange={formik.handleChange}
+                        value={formik.values.last_name}
+                        onBlur={formik.handleBlur} />
+                  </div>
                 </p>
-                <p>
+                <p><div><p className='fieldValidate'>{formik.touched.birthday && formik.errors.birthday ? formik.errors.birthday:""}</p>
                         <label>Birthday</label><br/>
                         <input type="text" name="birthday" 
-                        onChange={handleChange}
                         placeholder='2022-01-01'
-                        value={formValues.birthday}/>
+                        value={formik.values.birthday}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}/>
+                  </div>
                  </p>
                 <p>
-                    <button id="sub_btn">Register</button>
+                    <button id="sub_btn" type='submit' disabled={!formik.isValid}>Register</button>
                 </p>
             </form>
             
-            <footer>
-                <p><Link to="/">Back to Homepage</Link>.</p>
-            </footer>
+            <section>
+                <p ><Link to="/"><p class="text-white">Back to Homepage</p></Link>.</p>
+            </section>
         </div>
     )
 

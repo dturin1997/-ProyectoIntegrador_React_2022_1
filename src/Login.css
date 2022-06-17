@@ -10,7 +10,25 @@ body{
 }
 .fondo{
     background-color: rgba(83, 83, 83, 0.674);
-    padding: 3%;
+    padding: 1%;
+}
+
+.fondo2{
+    background-color: rgb(255, 255, 255);
+    padding: 4%;
+    margin: 1%;
+}
+
+.fondo3{
+    background-color: rgb(255, 255, 255);
+    padding: 0;
+    margin-top: 0.4%;
+}
+
+.fondo4{
+    background: rgb(222,231,222);
+    background: linear-gradient(90deg, rgba(222,231,222,1) 0%, rgba(253,254,253,0.6283555658591562) 50%, rgba(222,231,222,1) 100%);
+    margin-top: 0;
 }
 
 
