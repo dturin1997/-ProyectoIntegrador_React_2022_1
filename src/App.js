@@ -8,6 +8,7 @@ import RegisterPage from './components/pages/RegisterPage'
 import ForgetPasswordPage from './components/pages/ForgetPasswordPage'
 import HomePage from './components/pages/user/HomePage'
 import PerfilPage from './components/pages/user/PerfilPage'
+import EditPerfilPage from './components/pages/user/EditPerfilPage'
 import PerfilCIPage from './components/pages/user/PerfilCIPage'
 import PerfilCEPage from './components/pages/user/PerfilCEPage'
 import CursoUser from './components/pages/CursoUser'
@@ -26,6 +27,7 @@ export default function App() {
                     <Route path="/home" component={ HomePage } />
                     <Route path="/perfil" component={ PerfilPage } />
                     <Route path="/cursosInscritos" component={ PerfilCIPage } />
+                    <Route path="/editProfile" component={EditPerfilPage}/>
                     <Route path="/certificados" component={ PerfilCEPage }/>
                     <Route path="/cursoUsers" component={ DetallePage } />
                     <Route path="/cursoUser" component={ CursoUser } />

@@ -30,10 +30,8 @@ console.log(items.id)
                 <header>
                     
                 </header>
-                <h1 className="main-title home-page-title text-white">Welcome to Virtual Academy</h1>
-                <span><p>{localStorage.getItem('user-info')}</p></span>
-                <span><p>{items.username}</p></span>
-                <span><p>{items.email}</p></span>
+                <h1 className="main-title home-page-title text-white">Bienvenido a Virtual Academy</h1>
+            
                 <hr className='line'></hr>
                 <div>
                     <h3 class="text-white">Lista de Cursos</h3>

@@ -6,7 +6,9 @@ import axios from 'axios';
 class App extends Component {
 
   consulta = async () => { 
-    await axios.get('http://localhost:8080/users/1/cursoUser/')
+    const items=JSON.parse(localStorage.getItem('user-info'));
+    console.log("Usuario ID: "+items.id)
+    await axios.get('http://localhost:8080/users/'+items.id+'/cursoUser/')
     .then(res => {
       console.log(res.data)
       this.setState({ cursosDetail: res.data._embedded.cursoUsers })
@@ -88,7 +90,7 @@ class App extends Component {
     //this.state.cursosDetailUnidoNombreCurso
     //var promedio=(detalle['nota1']+detalle['nota2']+detalle['nota3'])/3;
 
-    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1']=16;
+    this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1']=13;
     console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1'])
     var nota1=this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota1'];
     var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
