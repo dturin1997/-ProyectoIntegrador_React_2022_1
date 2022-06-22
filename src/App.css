@@ -210,6 +210,18 @@ div.scroll_horizontal {
     margin-right: 37%;
 }
 
+.boton{
+    margin-top: 5%;
+}
+
+.formCI{
+    background-color: #14a120;
+}
+
+.detailBG{
+    background-color: #0b4b10;
+}
+
 .fieldValidate{
     color: #b40808;
     font-size: 12px;

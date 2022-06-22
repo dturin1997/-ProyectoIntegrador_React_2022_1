@@ -26,7 +26,10 @@ export default function SignInPage() {
          console.log("Error: ",err.response.data);
          setError(err.response.data.message);
        });
-       if (response && response.data) { 
+       if (response && response.data) {
+             const data = await response.data;
+            localStorage.setItem("user-info",JSON.stringify(data));
+            console.log(response); 
          formik.resetForm();
          window.location.href ="/home";
        }
@@ -45,7 +48,7 @@ export default function SignInPage() {
     return (
         <div class="body">
             <div className="text-center m-5-auto fondo">
-            <h2 class="text-white">Inicia Sesión</h2>
+            <h2 class="text-white">Inicio de Sesión</h2>
              <p className='formError'>{error ? error : ""}</p>
             <form class="div-form" onSubmit={formik.handleSubmit}>
                 <div>

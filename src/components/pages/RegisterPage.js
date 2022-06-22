@@ -112,7 +112,7 @@ export default function SignUpPage() {
                     </div>
                 </p>
                 <p><div><p className='fieldValidate'>{formik.touched.first_name && formik.errors.first_name ? formik.errors.first_name:""}</p>
-                        <label>Primer Nombre</label><br/>
+                        <label>Nombre</label><br/>
                         <input type="text" name="first_name" 
                         value={formik.values.first_name}
                         onChange={formik.handleChange}
@@ -138,12 +138,13 @@ export default function SignUpPage() {
                   </div>
                  </p>
                 <p>
-                    <button id="sub_btn" type='submit' disabled={!formik.isValid}>Registrar</button>
+                    <button id="sub_btn" type='submit' disabled={!formik.isValid}>Registrarse</button>
                 </p>
             </form>
             
             <section>
-                <p ><Link to="/"><p class="text-white">Volver</p></Link>.</p>
+                <p ><Link to="/"><p class="text-white">Volver a la pagina principal.</p></Link></p>
+                <p><Link to="/login"><p class="text-white">Iniciar Sesión</p></Link></p>
             </section>
         </div>
     )

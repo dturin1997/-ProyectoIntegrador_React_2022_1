@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
 import Layout from '../layout/Layout'
 import NavbarPerfil from '../Navbar/NavbarPerfil'
 
@@ -24,17 +23,10 @@ class PerfilCIPage extends Component {
         
         console.log(array)
               
-        //globalThis.arrayNombres=[]
-        //var arrayNombres=[]
         var arrayUnido=[]
-        //var arrayDetalle=[]
+       
         var x=0;
-        //this.setState({ cursosDetailNombres: [] })
-        /* 
-        array.forEach(function(valor,inidice) => {
-          
-        });
-        */ 
+
         let fillArray = async () => {   
         for(var i=0;i<array.length;i++){
           console.log("Soy valor de i: "+i)
@@ -45,25 +37,13 @@ class PerfilCIPage extends Component {
             .then(res => {
               console.log("valor de i: "+i+" data "+res.data.name)
               console.log("Soy valor de x: "+x)
-              //arrayDetalle.push(array[x])
-              
-              //arrayNombres.push(JSON.parse(JSON.stringify(res.data.name)))
-              //window.arrayNombres=[]
-              //window.arrayNombres.push(JSON.parse(JSON.stringify(res.data.name)))
-              //arrayNombres.push(JSON.parse(JSON.stringify(res.data.name)))
               
                 arrayUnido.push({cursoDetail: array[x],
                   cursoNombre: JSON.parse(JSON.stringify(res.data.name))
                 })
               
-              /*
-              arrayUnido.push({cursoDetail: array[x],
-                cursoNombre: JSON.parse(JSON.stringify(res.data.name))
-              })
-              */
               x++;
-              //console.log(arrayNombres)
-              //this.setState({ cursosDetailNombres: arrayNombres })
+           
               this.setState({ cursosDetailUnidoNombreCurso: arrayUnido})
             }).catch(err => {
               console.log(err);
@@ -71,10 +51,7 @@ class PerfilCIPage extends Component {
         }
       }
       fillArray()
-        //this.setState({ cursosDetailNombres: arrayNombres })
-        //console.log(arrayNombres)
-        //arrayNombres=[]
-        //console.log(arrayNombres)
+   
       })    
     }  
   
@@ -106,13 +83,13 @@ class PerfilCIPage extends Component {
       var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
       var nota3= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3'];
   
-      var promedio=(nota1+nota2+nota3)/3;
+      var prom=(nota1+nota2+nota3)/3;
+      var promedio= Math.round(prom,0);
       console.log(promedio)
       await axios.patch(url,{"promedio":promedio})
       this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio']=promedio;
       console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio'])
-      //this.consulta()
-      //this.render()
+
       this.forceUpdate();
       
     }
@@ -122,9 +99,7 @@ class PerfilCIPage extends Component {
       const max = 20;
       const rand = min + Math.random() * (max - min);
       await axios.patch(url,{"nota2":Math.round(rand)})
-      //this.consulta()
-      //var promedio=(detalle['nota1']+detalle['nota2']+detalle['nota3'])/3;
-      //console.log(promedio)
+
   
       this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2']=Math.round(rand);
       console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'])
@@ -132,7 +107,8 @@ class PerfilCIPage extends Component {
       var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
       var nota3= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3'];
   
-      var promedio=(nota1+nota2+nota3)/3;
+      var prom=(nota1+nota2+nota3)/3;
+      var promedio= Math.round(prom,0);
       console.log(promedio)
       await axios.patch(url,{"promedio":promedio})
       this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio']=promedio;
@@ -147,9 +123,7 @@ class PerfilCIPage extends Component {
       const max = 20;
       const rand = min + Math.random() * (max - min);
       await axios.patch(url,{"nota3":Math.round(rand)})
-      //this.consulta()
-      //var promedio=(detalle['nota1']+detalle['nota2']+detalle['nota3'])/3;
-      //console.log(promedio)
+
   
       this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3']=Math.round(rand);
       console.log(this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'])
@@ -158,7 +132,8 @@ class PerfilCIPage extends Component {
       var nota2= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota2'];
       var nota3= this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['nota3'];
   
-      var promedio=(nota1+nota2+nota3)/3;
+      var prom=(nota1+nota2+nota3)/3;
+      var promedio= Math.round(prom,0);
       console.log(promedio)
       await axios.patch(url,{"promedio":promedio})
       this.state.cursosDetailUnidoNombreCurso[index].cursoDetail['promedio']=promedio;
@@ -183,6 +158,21 @@ class PerfilCIPage extends Component {
     event.preventDefault();
 }
 
+eliminar(url,index){
+  let rpta = window.confirm("Desea eliminar?");
+  if(rpta){
+    
+    /*
+    axios.delete('http://127.0.0.1:8000/prestamos/'+cod+'/')
+    .then(res => {
+      var temp = this.state.cursosDetailUnidoNombreCurso.filter((prestamo)=>prestamo.id !== cod);
+      this.setState({
+        cursosDetailUnidoNombreCurso: temp
+      })
+    })*/
+  }
+}
+
 render() {
     return (
         <div className="text-center fondo">
@@ -196,7 +186,7 @@ render() {
            </div>
            
            <NavbarPerfil>
-
+        
            <h1>Lista de Detalle de Cursos</h1>
            {console.log(this.state.cursosDetailUnidoNombreCurso)}
         
@@ -212,8 +202,17 @@ render() {
                                     <img src="https://i.ytimg.com/vi/Q3JBvLOzL0o/mqdefault.jpg" class="card-img-top" alt="..." />
                                     <div class="card-body">
                                         <h5 class="card-title">{cursosDetailUnidoNombreCurso.cursoNombre}</h5>
+                                        
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Click Aquí</a>
+                                        <div class="row">
+                                          <div class="col">
+                                              <button class="btn btn-primary">Click Aquí</button>
+
+                                          </div>
+                                          <div class="col">
+                                              <button class="btn btn-danger" onClick={()=>this.eliminar(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1)}>Eliminar Curso</button>
+                                          </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row py-3">
@@ -223,44 +222,98 @@ render() {
                                     <div class="card fondo-card">
                                         <div class="card-body">
                                             <h6></h6>
-                                            <p>Do you want to see the details of the notes? <br/><strong>click the button</strong></p>
-                                           <p>Current average: {cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</p> 
+                                            <p>¿Quieres ver los detalles de tus notas? <br/><strong>Haz click detalles</strong></p>
+                                            
+                                              <p>Promedio actual:</p>
+                                              <p> {cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</p>
+                                            
                                             <p class="dropdown">
                                               <button class="dropdown-toggle btn btn-info"  id="dropdownMenuButton1" type="button" data-toggle="dropdown" aria-expanded="false">
                                               Ver detalles ...
                                               </button>
 
-                                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <form onSubmit = {this.afterSubmission}>
+                                              <div class="dropdown-menu detailBG" aria-labelledby="dropdownMenuButton1">
+                                                <form onSubmit = {this.afterSubmission} className="formCI">
+                                                <div>
+                                                  <table className="text-center">
+                                                  <tr>
 
+                                                    <td>
+                                                      <table>
+                                                        <tr>
+                                                          <td><strong>Nota1:</strong></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>
+                                                            {cursosDetailUnidoNombreCurso.cursoDetail['nota1']}
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <button class="btn btn-success" onClick={()=>this.calcularN1(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
+                                                        )}>Dar examen</button>
+                                                        </tr>
+                                                      </table>  
+                                                    </td>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <td>
+                                                      <table>
+                                                        <tr>
+                                                          <td><strong>Nota2:</strong></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>
+                                                            {cursosDetailUnidoNombreCurso.cursoDetail['nota2']}
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <button class="btn btn-success" onClick={()=>this.calcularN2(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
+                                                        )}>Dar examen</button>
+                                                        </tr>
+                                                        
+                                                      </table>
+                                                      
+                                                    </td> 
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <td>
+                                                      <table>
+                                                        <tr>
+                                                          <td><strong>Nota3:</strong></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>
+                                                            {cursosDetailUnidoNombreCurso.cursoDetail['nota3']}
+                                                          </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <button class="btn btn-success" onClick={()=>this.calcularN3(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
+                                                          )}>Dar examen</button>
+                                                        </tr>
+                                                        
+                                                      </table>
+                                                      
+                                                    </td> 
+                                                                  
+                                                  </tr>
+                                                  </table>
+                                                </div>
                                                <br></br> 
-                                               <p>Nota1:</p>
-                                                <p >{cursosDetailUnidoNombreCurso.cursoDetail['nota1']}
-                                                &nbsp;&nbsp;
-                                                <button onClick={()=>this.calcularN1(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
-                                                 )}>Dar examen</button>
-                                                </p>
-                                                <p>Nota2:</p>
-                                                <p > {cursosDetailUnidoNombreCurso.cursoDetail['nota2']}
-                                                &nbsp;&nbsp;
-                                                <button onClick={()=>this.calcularN2(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
-                                                )}>Dar examen</button>
-                                                </p>
-                                                <p>Nota3:</p>
-                                                <p  >{cursosDetailUnidoNombreCurso.cursoDetail['nota3']}
-                                                &nbsp;&nbsp;
-                                                <button onClick={()=>this.calcularN3(cursosDetailUnidoNombreCurso.cursoDetail['_links'].cursoUser.href,index1
-                                                )}>Dar examen</button>
-                                                </p>
-                                                <p class="dropdown-item" >Promedio: {cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</p>
-                                                <p class="dropdown-item" >Categoria:</p>
+                                               
+                                                <table>
+                                                  <tr>
+                                                  <td>Promedio: </td>
+                                                  &nbsp;&nbsp;
+                                                  <td>{cursosDetailUnidoNombreCurso.cursoDetail['promedio']}</td>
+                                                  </tr>
+                                                </table>
+                                             
                                                 </form>
                                               </div>
 
                                           </p>
                                         </div>
                                     </div>
-                                </div></div></>
+                                </div>
+                                </div></>
                         );
                     })}
                 <hr />

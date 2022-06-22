@@ -50,7 +50,6 @@ console.log(items.id)
                                                 <h5 class="card-title">{curso.name}</h5>
                                                 <p class="card-text">S/.{curso.precio}</p><br></br>
                                                 <p class="card-text">{curso.description}</p>
-                                                <p class="card-text">{curso._links.curso.href}</p>
                                                 <button 
                                                 //onClick={cursoi}
                                                 onClick={()=>cursoi(curso._links.curso.href)}
@@ -109,15 +108,13 @@ console.log(items.id)
             let result = await fetch("http://localhost:8080/cursoes");
             const data = await result.json();
             console.log(data)
-            //localStorage.setItem("user-info",JSON.stringify(data))
+         
             localStorage.setItem("curso-info",JSON.stringify(data))
-           // console.log(items3)
+           
         }
 
        async function cursoi(urlCurso){ 
-          //curso()
-
-          //let url1="http://localhost:8080/cursoes/"+items3.id
+     
           let url1 = urlCurso
           console.log(url1)
           let url2="http://localhost:8080/users/"+items.id
@@ -135,10 +132,7 @@ console.log(items.id)
                    "user": url2}
                 )
             });
-            //const data = await result.json();
-            
-            //localStorage.setItem("user-info",JSON.stringify(data))
-            //localStorage.setItem("cursoi-info",JSON.stringify(data))
+
             historyC.push("/cursosInscritos")
         }
 
